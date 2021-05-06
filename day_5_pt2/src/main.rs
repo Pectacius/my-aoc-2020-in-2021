@@ -19,11 +19,30 @@ fn main() {
         }
     }
 
-    let max_val = passes.iter().max();
-    match max_val {
-        Some(max_val) => println!( "Max id: {}", max_val ),
-        None => println!( "Vector is empty" ),
+    match find_seat(&mut passes) {
+        Some(seat) => println!("Seat id: {}", seat),
+        None => println!("Seat not found")
     }
+
+    let pos = find_pos("BFFFBBFRRR");
+    println!("{}, {}", pos.0, pos.1);
+    println!("{}", compute_id(pos.0, pos.1));
+}
+
+fn find_seat(seats: &mut Vec<i32>) -> Option<i32> {
+    seats.sort();
+    println!("{:?}", seats);
+    for (i, seat) in seats.iter().enumerate() {
+        match seats.get(i+1) {
+            Some(nxt_seat) => {
+                if (nxt_seat - seat) == 2 {
+                    return Some(seat + 1)
+                }
+            },
+            None => continue,
+        }
+    }
+    None
 }
 
 fn find_pos(input: &str) -> (i32, i32) {
@@ -72,3 +91,4 @@ fn find_pos(input: &str) -> (i32, i32) {
 fn compute_id(row: i32, column: i32) -> i32 {
     row * 8 + column
 }
+
