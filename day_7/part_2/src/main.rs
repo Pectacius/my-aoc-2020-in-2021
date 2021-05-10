@@ -5,7 +5,7 @@ use std::io::prelude::*;
 mod bags;
 
 fn main() {
-    let f = fs::File::open("bags.txt").expect("Unable to open file");
+    let f = fs::File::open("day_7/bags.txt").expect("Unable to open file");
     let f = BufReader::new(f);
 
     let mut iter = f.lines();

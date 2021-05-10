@@ -4,7 +4,7 @@ use std::io::prelude::*;
 
 
 fn main() {
-    let f = fs::File::open("pass.txt").expect("Unable to read file");
+    let f = fs::File::open("day_5/pass.txt").expect("Unable to read file");
     let f = BufReader::new(f);
 
     let mut passes: Vec<i32> = Vec::new();

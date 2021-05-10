@@ -1,7 +1,7 @@
 use std::fs;
 
 fn main() {
-    let contents = fs::read_to_string("passwords.txt")
+    let contents = fs::read_to_string("day_2/passwords.txt")
         .expect("Unable to read file");
 
     let mut valid_count = 0;

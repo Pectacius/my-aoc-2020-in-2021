@@ -5,7 +5,7 @@ use std::io::prelude::*;
 mod terrain;
 
 fn main() {
-    let f = fs::File::open("terrain.txt").expect("Unable to open file");
+    let f = fs::File::open("day_3/terrain.txt").expect("Unable to open file");
     let f = BufReader::new(f);
     
     let mut t = terrain::Terrain::new(3, 1);

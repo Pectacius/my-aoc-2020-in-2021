@@ -4,7 +4,7 @@ use std::io::prelude::*;
 use std::collections::HashMap;
 
 fn main() {
-    let f = fs::File::open("joltage.txt").expect("Unable to open file");
+    let f = fs::File::open("day_10/joltage.txt").expect("Unable to open file");
     let f = BufReader::new(f);
     let mut iter = f.lines();
 

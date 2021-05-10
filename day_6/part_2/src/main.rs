@@ -5,7 +5,7 @@ use std::io::prelude::*;
 mod questions;
 
 fn main() {
-    let f = fs::File::open("questions.txt").expect("Unable to open file");
+    let f = fs::File::open("day_6/questions.txt").expect("Unable to open file");
     let f = BufReader::new(f);
 
     let mut sum = 0;

@@ -45,7 +45,7 @@ impl Passport {
 }
 
 fn main() {
-    let contents = fs::read_to_string("passport.txt")
+    let contents = fs::read_to_string("day_4/passport.txt")
         .expect("Unable to read file");
     let mut valid_passports = 0;
     for line in contents.rsplit("\n\r\n") {

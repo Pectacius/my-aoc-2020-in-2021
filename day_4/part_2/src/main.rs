@@ -6,7 +6,7 @@ mod passport;
 
 
 fn main() {
-    let f = fs::File::open("passport.txt").expect("Unable to read file");
+    let f = fs::File::open("day_4/passport.txt").expect("Unable to read file");
     let f = BufReader::new(f);
     
     let mut count = 0;

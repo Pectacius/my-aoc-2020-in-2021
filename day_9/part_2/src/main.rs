@@ -9,7 +9,7 @@ fn main() {
     // This is literally "copy pasta" coding when it comes to parse
     // the input file as it has literally been the same for the last
     // 8 days... but I want each problem to be independent of each other.
-    let f = fs::File::open("XMAS.txt").expect("Unable to open file");
+    let f = fs::File::open("day_9/XMAS.txt").expect("Unable to open file");
     let f = BufReader::new(f);
     let mut iter = f.lines();
 

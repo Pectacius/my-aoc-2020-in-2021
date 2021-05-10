@@ -2,7 +2,7 @@ use std::fs;
 use std::collections::HashMap;
 
 fn main() {
-    let contents = fs::read_to_string("numbers.txt")
+    let contents = fs::read_to_string("day_1/numbers.txt")
         .expect("Unable to read file");
 
     let mut map: HashMap<i32, i32> = HashMap::new();
