@@ -12,43 +12,71 @@ dependencies = [
 [[package]]
 name = "day_10_part_1"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_10_part_2"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_1_part_1"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_1_part_2"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_2_part_1"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_2_part_2"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_3_part_1"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_3_part_2"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_4_part_1"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_4_part_2"
 version = "0.1.0"
 dependencies = [
+ "input_parser",
  "lazy_static",
  "regex",
 ]
@@ -56,41 +84,75 @@ dependencies = [
 [[package]]
 name = "day_5_part_1"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_5_part_2"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_6_part_1"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_6_part_2"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_7_part_1"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_7_part_2"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_8_part_1"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_8_part_2"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_9_part_1"
 version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
 
 [[package]]
 name = "day_9_part_2"
+version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
+
+[[package]]
+name = "input_parser"
 version = "0.1.0"
 
 [[package]]

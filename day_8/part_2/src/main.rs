@@ -1,52 +1,36 @@
-use std::fs;
-use std::io::BufReader;
-use std::io::prelude::*;
+use input_parser;
 
 mod program;
 
 fn main() {
-    let f = fs::File::open("day_8/instructions.txt").expect("Unable to open file");
-    let f = BufReader::new(f);
-    let mut iter = f.lines();
+    let result = input_parser::read_line_input(8, "instructions".to_string());
 
-    let mut input: Vec<String> = Vec::new();
+    match result {
+        Some(input) => {
+            let mut original = program::Program::new(input);
+            let length = original.len();
 
-    loop {
-        match iter.next() {
-            Some(val) => {
-                let curr_line = val.unwrap();
-                if curr_line == "" {
-                    break;
-                }
-                input.push(curr_line);
-            },
-            None => {
-                break;
-            }
-        }
-    }
+            let mut result = -1;
 
-    let mut original = program::Program::new(input);
-
-    let length = original.len();
-
-    let mut result = -1;
-
-    for i in 0..length {
-        if original.can_switch_instruction(i) {
-            let mut new_device = original.clone();
-            new_device.switch_instruction(i);
-            match new_device.run_to_end() {
-                Some(val) => {
-                    result = val;
-                    break;
-                },
-                None => {
-                    continue;
+            for i in 0..length {
+                if original.can_switch_instruction(i) {
+                    let mut new_device = original.clone();
+                    new_device.switch_instruction(i);
+                    match new_device.run_to_end() {
+                        Some(val) => {
+                            result = val;
+                            break;
+                        },
+                        None => {
+                            continue;
+                        }
+                    }
                 }
             }
+            println!("result: {}", result);
+        },
+        None => {
+            println!("Could not parse input");
         }
     }
-    //println!("{}, {}", device.accumulator, device.pc);
-    println!("result: {}", result);
 }

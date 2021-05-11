@@ -1,32 +1,26 @@
-use std::fs;
-use std::io::BufReader;
-use std::io::prelude::*;
+use input_parser;
 
 mod passport;
 
 
 fn main() {
-    let f = fs::File::open("day_4/passport.txt").expect("Unable to read file");
-    let f = BufReader::new(f);
-    
-    let mut count = 0;
+    let result = input_parser::read_new_line_delimiter_input(4, "passport".to_string());
 
-    let mut curr_value: String = "".to_owned();
+    match result {
+        Some(value) => {
+            let mut count = 0;
 
-    for line in f.lines() {
-        let curr_line = line.unwrap();
-        
-        if curr_line == "" {
-            let new_passport = passport::Passport::new(&curr_value);
-            curr_value = "".to_owned();
-            if new_passport.is_valid() {
-                count += 1;
+            for i in value {
+                let new_passport = passport::Passport::new(&i);
+                if new_passport.is_valid() {
+                    count += 1;
+                }
             }
-        } else {
-            curr_value.push_str(" ");
-            curr_value.push_str(&curr_line);
+            println!("Valid passports: {}", count);
+        },
+        None => {
+            println!("Could not read input");
         }
     }
-    println!("Valid passports: {}", count);
 }
 

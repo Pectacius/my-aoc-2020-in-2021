@@ -1,36 +1,25 @@
-use std::fs;
-use std::io::BufReader;
-use std::io::prelude::*;
+use input_parser;
 
 mod questions;
 
 fn main() {
-    let f = fs::File::open("day_6/questions.txt").expect("Unable to open file");
-    let f = BufReader::new(f);
+    let result = input_parser::read_new_line_delimiter_input(6, "questions".to_string());
 
-    let mut sum = 0;
+    match result {
+        Some(value) => {
+            let mut sum = 0;
 
-    let mut curr_question = questions::Questions::new();
-
-    let mut iter = f.lines();
-
-    loop {
-        match iter.next() {
-            Some(val) => {
-                let curr_line = val.unwrap();
-                if curr_line == "" {
-                    sum += curr_question.num_of_similar();
-                    curr_question = questions::Questions::new();
+            for i in value {
+                let mut curr_question = questions::Questions::new();
+                for j in i.split_whitespace() {
+                    curr_question.add_person(j);
                 }
-                else {
-                    curr_question.add_person(&curr_line);
-                }
-            },
-            None => {
                 sum += curr_question.num_of_similar();
-                break;
             }
+            println!("Sum: {}", sum);
+        },
+        None => {
+            println!("Could not parse input");
         }
     }
-    println!("sum: {}", sum);
 }

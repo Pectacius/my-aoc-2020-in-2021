@@ -1,40 +1,28 @@
-use std::fs;
-use std::io::BufReader;
-use std::io::prelude::*;
+use input_parser;
 
 mod bags;
 
 fn main() {
-    let f = fs::File::open("day_7/bags.txt").expect("Unable to open file");
-    let f = BufReader::new(f);
+    let result = input_parser::read_line_input(7, "bags".to_string());
+    
+    match result {
+        Some(value) => {
+            let mut bag_stats = bags::Bags::new();
 
-    let mut iter = f.lines();
-
-    let mut bag_stats = bags::Bags::new();
-
-    loop {
-        match iter.next() {
-            Some(val) => {
-                let curr_line = val.unwrap();
-                if curr_line == "" {
-                    break
-                }
-
+            for i in value {
                 let container: String;
                 let contains: Vec<String>;
-                let result = parse_line(curr_line);
+                let result = parse_line(i);
                 container = result.0;
                 contains = result.1;
                 bag_stats.insert_bag(&container, &contains);
-                
-            },
-            None => {
-                break;
             }
+            println!("Contains: {}", bag_stats.can_hold_count());
+        },
+        None => {
+            println!("Could not parse input");
         }
     }
-    //println!("{:?}", bag_stats.bags);
-    println!("Contains: {}", bag_stats.can_hold_count());
 }
 
 fn parse_line(line: String) -> (String, Vec<String>) {

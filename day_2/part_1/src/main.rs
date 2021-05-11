@@ -1,24 +1,30 @@
-use std::fs;
+use input_parser;
 
 fn main() {
-    let contents = fs::read_to_string("day_2/passwords.txt")
-        .expect("Unable to read file");
+    let contents = input_parser::read_line_input(2, "passwords".to_string());
+    
+    match contents {
+        Some(values) => {
+            let mut valid_count = 0;
 
-    let mut valid_count = 0;
-
-    for line in contents.lines() {
-        let (min, max, character, password) = parse_line(line);
-        let min = min.parse::<i32>().expect("Not a number");
-        let max = max.parse::<i32>().expect("Not a number");
-        let character: Vec<char> = character.chars().collect();
-        let character = character[0];
-        //println!("min: {}", min);
-        //println!("max: {}", max);
-        if is_valid(min, max, character, password) {
-            valid_count += 1;
+            for line in values {
+                let (min, max, character, password) = parse_line(&line);
+                let min = min.parse::<i32>().expect("Not a number");
+                let max = max.parse::<i32>().expect("Not a number");
+                let character: Vec<char> = character.chars().collect();
+                let character = character[0];
+                if is_valid(min, max, character, password) {
+                    valid_count += 1;
+                }
+            }
+            println!("Number of valid passwords: {}", valid_count);
+        },
+        None => {
+            println!("Could not read file");
         }
     }
-    println!("Number of valid passwords: {}", valid_count);
+
+    
 }
 
 fn parse_line(line: &str) -> (String, String, String, String) {

@@ -1,27 +1,24 @@
-use std::fs;
-use std::io::BufReader;
-use std::io::prelude::*;
+use input_parser;
 
 
 fn main() {
-    let f = fs::File::open("day_5/pass.txt").expect("Unable to read file");
-    let f = BufReader::new(f);
+    let result = input_parser::read_line_input(5, "pass".to_string());
+    match result {
+        Some(value) => {
+            let mut passes: Vec<i32> = Vec::new();
 
-    let mut passes: Vec<i32> = Vec::new();
-
-    for line in f.lines() {
-        let curr_line = line.unwrap();
-
-        // detect end of input
-        if curr_line != "" {
-            let pos = find_pos(&curr_line);
-            passes.push(compute_id(pos.0, pos.1));
+            for i in value {
+                let pos = find_pos(&i);
+                passes.push(compute_id(pos.0, pos.1));
+            }
+            match find_seat(&mut passes) {
+                Some(seat) => println!("Seat id: {}", seat),
+                None => println!("Seat not found")
+            }
+        },
+        None => {
+            println!("Could not read input");
         }
-    }
-
-    match find_seat(&mut passes) {
-        Some(seat) => println!("Seat id: {}", seat),
-        None => println!("Seat not found")
     }
 }
 

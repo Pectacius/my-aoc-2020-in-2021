@@ -1,40 +1,30 @@
-use std::fs;
-use std::io::BufReader;
-use std::io::prelude::*;
+use input_parser;
 
 mod terrain;
 
 fn main() {
-    let f = fs::File::open("day_3/terrain.txt").expect("Unable to open file");
-    let f = BufReader::new(f);
-    
-    let mut t = terrain::Terrain::new(3, 1);
+    let input = input_parser::read_line_input(3, "terrain".to_string());
 
-    let mut iter = f.lines();
+    match input {
+        Some(lines) => {
+            let mut t = terrain::Terrain::new(3, 1);
 
-    // insert each row
-    loop {
-        match iter.next() {
-            Some(val) => {
-                let curr_line = val.unwrap();
-                if curr_line == "" {
-                    break;
-                }
-                let line: Vec<u8> = curr_line.bytes().collect();
-                t.add_row(line);
-            },
-            None => {
-                break;
+            for line in lines {
+                let row: Vec<u8> = line.bytes().collect();
+                t.add_row(row);
             }
-        }
-    }
-    let mut tree_count = 0;
+            let mut tree_count = 0;
 
-    while t.has_next() {
-        let pos = t.next();
-        if pos == b'#' {
-            tree_count += 1;
+            while t.has_next() { 
+                let pos = t.next();
+                if pos == b'#' {
+                    tree_count += 1;
+                }
+            }
+            println!("Trees hit: {}", tree_count);
+        },
+        None => {
+            println!("Coult not read file");
         }
     }
-    println!("Trees hit: {}", tree_count);
 }

@@ -1,45 +1,35 @@
-use std::fs;
-use std::io::BufReader;
-use std::io::prelude::*;
 use std::collections::HashSet;
 use std::iter::FromIterator;
+use input_parser;
 
 
 fn main() {
-    // This is literally "copy pasta" coding when it comes to parse
-    // the input file as it has literally been the same for the last
-    // 8 days... but I want each problem to be independent of each other.
-    let f = fs::File::open("day_9/XMAS.txt").expect("Unable to open file");
-    let f = BufReader::new(f);
-    let mut iter = f.lines();
+    let result = input_parser::read_line_input(9, "XMAS".to_string());
 
-    let mut input: Vec<u64> = Vec::new();
+    match result {
+        Some(value) => {
+            
+            let mut input: Vec<u64> = Vec::new();
 
-    loop {
-        match iter.next() {
-            Some(val) => {
-                let curr_line = val.unwrap();
-                if curr_line == "" {
+            for i in value {
+                let num = i.parse::<u64>().unwrap();
+                input.push(num);
+            }
+
+            let start_index: usize = 25;
+
+            for i in start_index..input.len() {
+                let prev = &input[i-start_index..i];
+                //assert!(prev.len() == 25);
+                let value = input[i];
+                if !contains_sum(value, prev) {
+                    println!("Number: {}", value);
                     break;
                 }
-                let value = curr_line.parse::<u64>().unwrap();
-                input.push(value);
-            },
-            None => {
-                break;
             }
-        }
-    }
-
-    let start_index: usize = 25;
-
-    for i in start_index..input.len() {
-        let prev = &input[i-start_index..i];
-        //assert!(prev.len() == 25);
-        let value = input[i];
-        if !contains_sum(value, prev) {
-            println!("Number: {}", value);
-            break;
+        },
+        None => {
+            println!("Could not parse input");
         }
     }
 }

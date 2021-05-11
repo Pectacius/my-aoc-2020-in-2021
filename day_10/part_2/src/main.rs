@@ -1,44 +1,36 @@
-use std::fs;
-use std::io::BufReader;
-use std::io::prelude::*;
 use std::collections::HashMap;
+use input_parser;
 
 fn main() {
-    let f = fs::File::open("day_10/joltage.txt").expect("Unable to open file");
-    let f = BufReader::new(f);
-    let mut iter = f.lines();
+    let result = input_parser::read_line_input(10, "joltage".to_string());
 
-    let mut input: Vec<i32> = Vec::new();
-    input.push(0); // starting jolt
+    match result {
+        Some(value) => {
+            let mut input: Vec<i32> = Vec::new();
+            input.push(0); // starting jolt
 
-    loop {
-        match iter.next() {
-            Some(val) => {
-                let curr_line = val.unwrap();
-                if curr_line == "" {
-                    break;
-                }
-                let value = curr_line.parse::<i32>().unwrap();
-                input.push(value);
-            },
-            None => {
-                break;
+            for i in value {
+                let num = i.parse::<i32>().unwrap();
+                input.push(num);
             }
+
+            input.sort();
+
+            // add the last element. Always 3 jolts greater
+            input.push(input[input.len()-1]+3);
+
+            let mut prev_values: HashMap<i32, u64> = HashMap::new();
+            prev_values.insert(0, 1); 
+
+            let combinations = find_combinations(&input, &mut prev_values);
+
+            println!("Total combinations: {}", combinations);
+
+        },
+        None => {
+            println!("Could not parse input");
         }
-    }
-
-
-    input.sort();
-
-    // add the last element. Always 3 jolts greater
-    input.push(input[input.len()-1]+3);
-
-    let mut prev_values: HashMap<i32, u64> = HashMap::new();
-    prev_values.insert(0, 1); 
-
-    let combinations = find_combinations(&input, &mut prev_values);
-
-    println!("Total combinations: {}", combinations);
+    }    
 }
 
 fn find_combinations(input: &Vec<i32>, visited: &mut HashMap<i32, u64>) -> u64 {
