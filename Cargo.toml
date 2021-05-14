@@ -28,4 +28,6 @@ members = [
     "day_13/part_2",
     "day_14/part_1",
     "day_14/part_2",
+    "day_15/part_1",
+    "day_15/part_2",
 ]

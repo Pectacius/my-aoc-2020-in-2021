@@ -80,6 +80,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "day_15_part_1"
+version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
+
+[[package]]
+name = "day_15_part_2"
+version = "0.1.0"
+dependencies = [
+ "input_parser",
+]
+
+[[package]]
 name = "day_1_part_1"
 version = "0.1.0"
 dependencies = [
