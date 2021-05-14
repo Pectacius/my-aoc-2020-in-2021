@@ -54,7 +54,6 @@ impl Game {
     pub fn nth_number(&mut self, n: u32) -> u32 {
         while self.turn <= n {
             self.next_turn();
-            println!("{}", self.last_said_num);
         }
         self.last_said_num
     }
