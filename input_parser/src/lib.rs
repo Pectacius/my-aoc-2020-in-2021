@@ -113,3 +113,48 @@ pub fn read_split_newline(day: u32, file_name: String) -> Option<Vec<String>> {
         Err(_) => None
     }
 }
+
+pub fn read_ticket(file_name: String) -> Option<(Vec<String>, String, Vec<String>)> {
+    let path = format!("day_16/{}.txt", file_name);
+    match fs::File::open(path) {
+        Ok(f) => {
+            let mut rules: Vec<String> = Vec::new();
+            let mut your_ticket = String::from("");
+            let mut nearby_ticket: Vec<String> = Vec::new();
+            
+            let f = BufReader::new(f);
+            let mut iter = f.lines();
+
+            let mut curr_section = 1;
+
+            loop {
+                match iter.next() {
+                    Some(val) => {
+                        let curr_line = val.unwrap();
+                        if curr_line == "" {
+                            continue;
+                        }
+                        if (curr_line == "your ticket:") || (curr_line == "nearby tickets:") {
+                            curr_section += 1;
+                            continue;
+                        }
+                        if curr_section == 1 {
+                            rules.push(curr_line.to_owned());
+                        }
+                        if curr_section == 2 {
+                            your_ticket = curr_line.to_owned();
+                        }
+                        if curr_section == 3 {
+                            nearby_ticket.push(curr_line.to_owned());
+                        }
+                    },
+                    None => {
+                        break;
+                    }
+                }
+            }
+            Some((rules, your_ticket, nearby_ticket))
+        },
+        Err(_) => None
+    }
+}
