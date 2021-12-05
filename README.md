@@ -1,7 +1,15 @@
-# my-aoc-2020-in-2021
-My AOC 2020 solutions in Rust only using standard library (except that day where I needed to use regex)
+# my-aoc
+My AOC 2020 solutions
 
-Each folder is one seperate question and is meant to be able to run in isolation from other questions.
+## 2021
+Completed with Racket.
+
+Each subfolder is one seperate question and is meant to be able to run in isolation from other questions.
+
+## 2020
+Completed with Rust
+
+Each subfolder is one seperate question and is meant to be able to run in isolation from other questions.
 
 Running `cargo build` will build all binaries for all the days and parts
 
