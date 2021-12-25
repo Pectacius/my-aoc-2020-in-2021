@@ -9,6 +9,8 @@ Each subfolder is one separate question and is meant to be able to run in isolat
 The solution for each day and part is given a specific name in the format of `day<day_number>/pt<part_number>.rkt`. For example,
 to run the solution for Day 6 part 1, `racket 2021/day6/pt1.rkt`.
 
+Most solutions for each day and part have unit-tests which can be run via `raco test day<day_number>/pt<part_number>.rkt`.
+
 ## 2020
 Completed with Rust
 
